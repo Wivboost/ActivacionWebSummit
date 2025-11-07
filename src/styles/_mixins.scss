@@ -1,0 +1,123 @@
+@use 'variables' as *;
+
+@mixin button-base {
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  transition: all $transition-base;
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: $smart-blue;
+  color: $smart-white;
+
+  &:hover:not(:disabled) {
+    background-color: $smart-blue-hover;
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background-color: $gray-200;
+  color: $gray-700;
+
+  &:hover:not(:disabled) {
+    background-color: $gray-300;
+  }
+}
+
+@mixin input-base {
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  border: 1px solid $gray-300;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  transition: all $transition-base;
+
+  &:focus {
+    outline: none;
+    border-color: $smart-blue;
+    box-shadow: 0 0 0 3px $smart-blue-light;
+  }
+
+  &::placeholder {
+    color: $gray-400;
+  }
+}
+
+@mixin card {
+  background: $smart-white;
+  border: 1px solid $gray-200;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-smart;
+}
+
+@mixin modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn $transition-base;
+}
+
+@mixin modal-content {
+  background: $smart-white;
+  border-radius: $radius-xl;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: slideUp $transition-slow;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin scrollbar-custom {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $smart-beige;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $smart-gray;
+    border-radius: 3px;
+
+    &:hover {
+      background: $smart-blue;
+    }
+  }
+}

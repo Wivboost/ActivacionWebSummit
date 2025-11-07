@@ -1,0 +1,172 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.main {
+  min-height: calc(100vh - 3.5rem);
+  background: $smart-beige;
+  padding: $spacing-2xl $spacing-lg;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.formCard {
+  @include card;
+  padding: $spacing-3xl;
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+
+  h1 {
+    font-size: $font-size-2xl;
+    color: $smart-blue;
+    font-weight: 700;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $gray-600;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xl;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $gray-700;
+    margin-bottom: $spacing-md;
+  }
+
+  input,
+  select,
+  textarea {
+    @include input-base;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+  }
+
+  .inputError {
+    border-color: $error-red;
+  }
+}
+
+.required {
+  color: $error-red;
+}
+
+.error {
+  font-size: $font-size-xs;
+  color: $error-red;
+  margin-top: $spacing-xs;
+}
+
+.imageStyleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: $spacing-lg;
+}
+
+.styleCard {
+  @include card;
+  padding: $spacing-lg;
+  cursor: pointer;
+  transition: all $transition-base;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+
+  &:hover {
+    border-color: $smart-blue-border;
+    transform: translateY(-2px);
+  }
+}
+
+.styleCardActive {
+  border-color: $smart-blue;
+  background: $smart-blue-light;
+}
+
+.styleImage {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $gray-100;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.styleLabel {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $gray-700;
+  text-align: center;
+}
+
+.cameraSection {
+  padding: $spacing-xl;
+  background: $smart-beige;
+  border-radius: $radius-lg;
+
+  h3 {
+    font-size: $font-size-lg;
+    color: $smart-blue;
+    font-weight: 600;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.cameraGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-xl;
+}
+
+.submitButton {
+  @include button-primary;
+  padding: $spacing-lg $spacing-2xl;
+  font-size: $font-size-base;
+  font-weight: 600;
+  margin-top: $spacing-lg;
+  width: 100%;
+  max-width: 300px;
+  align-self: center;
+}
+
+@media (max-width: 768px) {
+  .formCard {
+    padding: $spacing-xl;
+  }
+
+  .imageStyleGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cameraGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/nextjs,node,amplify
 # Edit at https://www.toptal.com/developers/gitignore?templates=nextjs,node,amplify
 
+
+# files
+setup_form.sh
+
 ### Amplify ###
 # AWS Amplify
 amplify/\#current-cloud-backend
