@@ -14,6 +14,10 @@ export interface PersonalData {
   name: string;
   email: string;
   company?: string;
+  role?: string;
+  companyStage?: string;
+  phone?: string;
+  madtechInterest?: string;
 }
 
 export interface SubmitPayload extends FormData, PersonalData {}

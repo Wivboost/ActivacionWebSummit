@@ -21,10 +21,10 @@ const INDUSTRIES = [
 ];
 
 const IMAGE_STYLES = [
-  { value: 'realistic', label: 'Realista/Formal', image: '/realista.jpg' },
-  { value: 'cartoon', label: 'Caricatura/Ilustración', image: '/cartoon.webp' },
-  { value: 'anime', label: 'Anime/Sci-Fi', image: '/anime.png' },
-  { value: 'abstract', label: 'Abstracto/Conceptual', image: '/abstract.jpeg' },
+  { value: 'realistic', label: 'Realista/Formal', image: '/create_1.png' },
+  { value: 'cartoon', label: 'Caricatura/Ilustración', image: '/Create_2.png' },
+  { value: 'anime', label: 'Anime/Sci-Fi', image: '/create_3.png' },
+  { value: 'abstract', label: 'Abstracto/Conceptual', image: '/Creative_4.png' },
 ];
 
 const TONES = [

@@ -10,28 +10,45 @@ interface PersonalDataModalProps {
   onSubmit: (data: PersonalData) => void;
 }
 
+const COMPANY_STAGES = ['Alpha', 'Beta', 'Growth'];
+const MADTECH_SOLUTIONS = ['MadMonitor', 'MadStreet', 'MadSmart', 'MadCreate', 'MadFriday'];
+
 export default function PersonalDataModal({ isOpen, onClose, onSubmit }: PersonalDataModalProps) {
   const [formData, setFormData] = useState<PersonalData>({
     name: '',
     email: '',
     company: '',
+    role: '',
+    companyStage: '',
+    phone: '',
+    madtechInterest: '',
   });
 
-  const [errors, setErrors] = useState<Partial<PersonalData>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof PersonalData, string>>>({});
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  const validatePhone = (phone: string) => {
+    // Allow optional phone, but if provided, should be valid
+    if (!phone) return true;
+    return /^[\d\s\-\+\(\)]+$/.test(phone);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const newErrors: Partial<PersonalData> = {};
+    const newErrors: Partial<Record<keyof PersonalData, string>> = {};
     
     if (!formData.email) {
       newErrors.email = 'El correo electrónico es requerido';
     } else if (!validateEmail(formData.email)) {
       newErrors.email = 'Correo electrónico inválido';
+    }
+
+    if (formData.phone && !validatePhone(formData.phone)) {
+      newErrors.phone = 'Número telefónico inválido';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -47,6 +64,13 @@ export default function PersonalDataModal({ isOpen, onClose, onSubmit }: Persona
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
     }
+  };
+
+  const handleStageToggle = (stage: string) => {
+    setFormData(prev => ({
+      ...prev,
+      companyStage: stage
+    }));
   };
 
   if (!isOpen) return null;
@@ -99,6 +123,62 @@ export default function PersonalDataModal({ isOpen, onClose, onSubmit }: Persona
               onChange={(e) => handleChange('company', e.target.value)}
               placeholder="Nombre de tu empresa"
             />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="role">Rol/Puesto en la Empresa</label>
+            <input
+              id="role"
+              type="text"
+              value={formData.role}
+              onChange={(e) => handleChange('role', e.target.value)}
+              placeholder="Ej: CEO, Director de Marketing, etc."
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="phone">Número Telefónico</label>
+            <input
+              id="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => handleChange('phone', e.target.value)}
+              placeholder="+52 123 456 7890"
+              className={errors.phone ? styles.inputError : ''}
+            />
+            {errors.phone && <span className={styles.error}>{errors.phone}</span>}
+          </div>
+
+          <div className={styles.formGroup}>
+            <label>Etapa de tu Empresa</label>
+            <div className={styles.checkboxGroup}>
+              {COMPANY_STAGES.map(stage => (
+                <label key={stage} className={styles.checkboxLabel}>
+                  <input
+                    type="radio"
+                    name="companyStage"
+                    checked={formData.companyStage === stage}
+                    onChange={() => handleStageToggle(stage)}
+                    className={styles.checkbox}
+                  />
+                  <span>{stage}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="madtechInterest">Solución de MadTech de tu Interés</label>
+            <select
+              id="madtechInterest"
+              value={formData.madtechInterest}
+              onChange={(e) => handleChange('madtechInterest', e.target.value)}
+            >
+              <option value="">Selecciona una opción</option>
+              {MADTECH_SOLUTIONS.map(solution => (
+                <option key={solution} value={solution}>{solution}</option>
+              ))}
+            </select>
           </div>
 
           <div className={styles.footer}>
