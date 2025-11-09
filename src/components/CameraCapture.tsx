@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styles from './CameraCapture.module.scss';
 
 interface CameraCaptureProps {
@@ -15,15 +15,27 @@ export default function CameraCapture({ onCapture, label, capturedImage }: Camer
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  // Efecto para manejar el stream del video
+  useEffect(() => {
+    if (stream && videoRef.current) {
+      videoRef.current.srcObject = stream;
+      // Llamar explícitamente a play() para asegurar que el video se reproduzca
+      videoRef.current.play().catch(err => {
+        console.error('Error playing video:', err);
+      });
+    }
+  }, [stream]);
+
   const startCamera = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'user' }
+        video: { 
+          facingMode: 'user',
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        }
       });
       setStream(mediaStream);
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-      }
       setIsOpen(true);
     } catch (error) {
       console.error('Error accessing camera:', error);
@@ -96,7 +108,14 @@ export default function CameraCapture({ onCapture, label, capturedImage }: Camer
       {isOpen && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
-            <video ref={videoRef} autoPlay playsInline className={styles.video} />
+            <video 
+              ref={videoRef} 
+              autoPlay 
+              playsInline 
+              muted
+              className={styles.video}
+              style={{ minHeight: '300px' }}
+            />
             <canvas ref={canvasRef} style={{ display: 'none' }} />
             <div className={styles.controls}>
               <button type="button" onClick={capturePhoto} className={styles.captureBtn}>
