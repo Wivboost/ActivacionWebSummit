@@ -121,7 +121,7 @@ export default function PersonalDataModal({ isOpen, onClose, onSubmit }: Persona
               type="text"
               value={formData.company}
               onChange={(e) => handleChange('company', e.target.value)}
-              placeholder="Name de tu empresa"
+              placeholder="Name of your company"
             />
           </div>
 
@@ -150,7 +150,7 @@ export default function PersonalDataModal({ isOpen, onClose, onSubmit }: Persona
           </div>
 
           <div className={styles.formGroup}>
-            <label>Etapa de tu Company</label>
+            <label>Stage of your Company</label>
             <div className={styles.checkboxGroup}>
               {COMPANY_STAGES.map(stage => (
                 <label key={stage} className={styles.checkboxLabel}>

@@ -193,7 +193,7 @@ export default function FormPage() {
                   onChange={(e) => handleInputChange('industry', e.target.value)}
                   className={errors.industry ? styles.inputError : ''}
                 >
-                  <option value="">Selecciona una opción</option>
+                  <option value="">Select an option</option>
                   {INDUSTRIES.map(industry => (
                     <option key={industry} value={industry}>{industry}</option>
                   ))}
@@ -246,7 +246,7 @@ export default function FormPage() {
                   value={formData.tone}
                   onChange={(e) => handleInputChange('tone', e.target.value)}
                 >
-                  <option value="">Selecciona una opción</option>
+                  <option value="">Select an option</option>
                   {TONES.map(tone => (
                     <option key={tone} value={tone}>{tone}</option>
                   ))}
@@ -261,7 +261,7 @@ export default function FormPage() {
                   value={formData.cta}
                   onChange={(e) => handleInputChange('cta', e.target.value)}
                 >
-                  <option value="">Selecciona una opción</option>
+                  <option value="">Select an option</option>
                   {CTAS.map(cta => (
                     <option key={cta} value={cta}>{cta}</option>
                   ))}
