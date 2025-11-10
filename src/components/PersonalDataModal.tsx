@@ -126,7 +126,7 @@ export default function PersonalDataModal({ isOpen, onClose, onSubmit }: Persona
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="role">Rol/Puesto en la Company</label>
+            <label htmlFor="role">Role/Position in the Company</label>
             <input
               id="role"
               type="text"
