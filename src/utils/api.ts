@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { SubmitPayload, JobResponse, ResultResponse } from '@/types/form';
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+const API_BASE_URL = 'https://9hrz2gxh-8000.usw3.devtunnels.ms/api/v1'//'http://localhost:8000/api/v1'; 
 
 export const submitForm = async (data: SubmitPayload): Promise<string> => {
   const formData = new FormData();
