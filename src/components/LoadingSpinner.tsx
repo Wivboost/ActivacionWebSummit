@@ -5,7 +5,7 @@ interface LoadingSpinnerProps {
   progress?: number;
 }
 
-export default function LoadingSpinner({ message = 'Procesando...', progress }: LoadingSpinnerProps) {
+export default function LoadingSpinner({ message = 'Processing...', progress }: LoadingSpinnerProps) {
   return (
     <div className={styles.overlay}>
       <div className={styles.content}>

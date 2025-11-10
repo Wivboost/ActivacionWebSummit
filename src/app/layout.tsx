@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Smart MAdTech - Generador de Anuncios",
-  description: "Crea anuncios inteligentes con IA",
+  title: "Smart MAdTech - Ad Generator",
+  description: "Create smart ads with AI",
 };
 
 export default function RootLayout({

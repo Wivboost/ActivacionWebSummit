@@ -11,34 +11,34 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import styles from './page.module.scss';
 
 const INDUSTRIES = [
-  'SaaS / Software B2B',
-  'Fintech / Servicios Financieros',
+  'SaaS / B2B Software',
+  'Fintech / Financial Services',
   'E-commerce / Retail',
-  'Hardware / IoT (Internet de las Cosas)',
-  'Recursos Humanos / Talento',
-  'Deep Tech / Investigación (IA/ML complejo)',
-  'Otro',
+  'Hardware / IoT (Internet of Things)',
+  'Human Resources / Talent',
+  'Deep Tech / Research (AI/ML)',
+  'Other',
 ];
 
 const IMAGE_STYLES = [
-  { value: 'realistic', label: 'Realista/Formal', image: '/create_1.png' },
-  { value: 'cartoon', label: 'Caricatura/Ilustración', image: '/Create_2.png' },
+  { value: 'realistic', label: 'Realistic/Formal', image: '/create_1.png' },
+  { value: 'cartoon', label: 'Cartoon/Illustration', image: '/Create_2.png' },
   { value: 'anime', label: 'Anime/Sci-Fi', image: '/create_3.png' },
-  { value: 'abstract', label: 'Abstracto/Conceptual', image: '/Creative_4.png' },
+  { value: 'abstract', label: 'Abstract/Conceptual', image: '/Creative_4.png' },
 ];
 
 const TONES = [
-  'Irónico/Satírico',
-  'Chistoso/Relajado',
-  'Formal/Directo',
-  'Visionario/Inspirador',
+  'Ironic/Satirical',
+  'Funny/Casual',
+  'Formal/Direct',
+  'Visionary/Inspirational',
 ];
 
 const CTAS = [
-  'Comprar/Contratar',
-  'Aprender/Demo',
-  'Invertir/Contactar',
-  'Unirse al equipo',
+  'Buy/Hire',
+  'Learn/Demo',
+  'Invest/Contact',
+  'Join the team',
 ];
 
 export default function FormPage() {
@@ -82,13 +82,13 @@ export default function FormPage() {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
 
     if (!formData.productName.trim()) {
-      newErrors.productName = 'El nombre del producto es requerido';
+      newErrors.productName = 'Product name is required';
     }
     if (!formData.industry) {
-      newErrors.industry = 'Selecciona una industria';
+      newErrors.industry = 'Select an industry';
     }
     if (!formData.imageStyle) {
-      newErrors.imageStyle = 'Selecciona un estilo de imagen';
+      newErrors.imageStyle = 'Select an image style';
     }
 
     setErrors(newErrors);
@@ -106,7 +106,7 @@ export default function FormPage() {
   const handlePersonalDataSubmit = async (personalData: PersonalData) => {
     setShowPersonalModal(false);
     setIsLoading(true);
-    setLoadingMessage('Enviando tu formulario...');
+    setLoadingMessage('Submitting your form...');
     setLoadingProgress(10);
 
     try {
@@ -117,7 +117,7 @@ export default function FormPage() {
 
       const jobId = await submitForm(payload);
       
-      setLoadingMessage('Generando tu anuncio...');
+      setLoadingMessage('Generating your ad...');
       setLoadingProgress(30);
 
       const result = await pollResults(jobId, (attempt) => {
@@ -128,11 +128,11 @@ export default function FormPage() {
         setResultImageUrl(result.imageUrl);
         setShowResultsModal(true);
       } else if (result.status === 'error') {
-        alert(`Error: ${result.error || 'Ocurrió un error al procesar tu solicitud'}`);
+        alert(`Error: ${result.error || 'An error occurred processing your request'}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Ocurrió un error. Por favor, intenta nuevamente.');
+      alert('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
       setLoadingProgress(0);
@@ -161,22 +161,22 @@ export default function FormPage() {
         <div className={styles.container}>
           <div className={styles.formCard}>
             <div className={styles.formHeader}>
-              <h1>Crea tu Anuncio Inteligente</h1>
-              <p>Responde las preguntas para generar tu anuncio personalizado</p>
+              <h1>Create Your Smart Ad</h1>
+              <p>Answer the questions to generate your personalized ad</p>
             </div>
 
             <form onSubmit={handleFormSubmit} className={styles.form}>
               {/* Question 1: Product Name */}
               <div className={styles.formGroup}>
                 <label htmlFor="productName">
-                  1. Nombre de mi Producto/Solución/Empresa <span className={styles.required}>*</span>
+                  1. Name of my Product/Solution/Company <span className={styles.required}>*</span>
                 </label>
                 <input
                   id="productName"
                   type="text"
                   value={formData.productName}
                   onChange={(e) => handleInputChange('productName', e.target.value)}
-                  placeholder="Escribe el nombre de tu producto"
+                  placeholder="Enter your product name"
                   className={errors.productName ? styles.inputError : ''}
                 />
                 {errors.productName && <span className={styles.error}>{errors.productName}</span>}
@@ -185,7 +185,7 @@ export default function FormPage() {
               {/* Question 2: Industry */}
               <div className={styles.formGroup}>
                 <label htmlFor="industry">
-                  2. Giro/Industria principal de mi empresa <span className={styles.required}>*</span>
+                  2. Main Industry of my company <span className={styles.required}>*</span>
                 </label>
                 <select
                   id="industry"
@@ -204,7 +204,7 @@ export default function FormPage() {
               {/* Question 3: Image Style */}
               <div className={styles.formGroup}>
                 <label>
-                  3. El estilo de imagen para mi anuncio debe ser <span className={styles.required}>*</span>
+                  3. The image style for my ad should be <span className={styles.required}>*</span>
                 </label>
                 <div className={styles.imageStyleGrid}>
                   {IMAGE_STYLES.map(style => (
@@ -227,20 +227,20 @@ export default function FormPage() {
               {/* Question 4: Problem Statement */}
               <div className={styles.formGroup}>
                 <label htmlFor="problemStatement">
-                  4. ¿Qué PROBLEMA esencial resuelves?
+                  4. What essential PROBLEM do you solve?
                 </label>
                 <textarea
                   id="problemStatement"
                   value={formData.problemStatement}
                   onChange={(e) => handleInputChange('problemStatement', e.target.value)}
-                  placeholder="Mi empresa resuelve el problema de..."
+                  placeholder="My company solves the problem of..."
                   rows={4}
                 />
               </div>
 
               {/* Question 5: Tone */}
               <div className={styles.formGroup}>
-                <label htmlFor="tone">5. El TONO que debe tener mi anuncio final es</label>
+                <label htmlFor="tone">5. The TONE my final ad should have</label>
                 <select
                   id="tone"
                   value={formData.tone}
@@ -255,7 +255,7 @@ export default function FormPage() {
 
               {/* Question 6: CTA */}
               <div className={styles.formGroup}>
-                <label htmlFor="cta">6. Llamada a la Acción (CTA)</label>
+                <label htmlFor="cta">6. Call to Action (CTA)</label>
                 <select
                   id="cta"
                   value={formData.cta}
@@ -270,15 +270,15 @@ export default function FormPage() {
 
               {/* Camera Captures */}
               <div className={styles.cameraSection}>
-                <h3>Personaliza tu anuncio (opcional)</h3>
+                <h3>Customize your ad (optional)</h3>
                 <div className={styles.cameraGrid}>
                   <CameraCapture
-                    label="Agregar tu foto"
+                    label="Add your photo"
                     onCapture={handleUserPhoto}
                     capturedImage={userPhotoPreview}
                   />
                   <CameraCapture
-                    label="Agregar logo"
+                    label="Add logo"
                     onCapture={handleLogoPhoto}
                     capturedImage={logoPhotoPreview}
                   />
@@ -287,7 +287,7 @@ export default function FormPage() {
 
               {/* Submit Button */}
               <button type="submit" className={styles.submitButton}>
-                Generar Anuncio
+                Generate Ad
               </button>
             </form>
           </div>

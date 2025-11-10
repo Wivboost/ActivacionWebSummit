@@ -39,7 +39,7 @@ export default function CameraCapture({ onCapture, label, capturedImage }: Camer
       setIsOpen(true);
     } catch (error) {
       console.error('Error accessing camera:', error);
-      alert('No se pudo acceder a la cámara');
+      alert('Could not access camera');
     }
   };
 
@@ -82,13 +82,13 @@ export default function CameraCapture({ onCapture, label, capturedImage }: Camer
       
       {capturedImage ? (
         <div className={styles.preview}>
-          <img src={capturedImage} alt="Captura" />
+          <img src={capturedImage} alt="Captured photo" />
           <button
             type="button"
             onClick={startCamera}
             className={styles.retakeButton}
           >
-            Tomar otra foto
+            Take another photo
           </button>
         </div>
       ) : (
@@ -119,10 +119,10 @@ export default function CameraCapture({ onCapture, label, capturedImage }: Camer
             <canvas ref={canvasRef} style={{ display: 'none' }} />
             <div className={styles.controls}>
               <button type="button" onClick={capturePhoto} className={styles.captureBtn}>
-                Capturar
+                Capture
               </button>
               <button type="button" onClick={stopCamera} className={styles.cancelBtn}>
-                Cancelar
+                Cancel
               </button>
             </div>
           </div>
